@@ -1,8 +1,13 @@
+
+# TwisSpark 8Ball Bot para Discord BDFD con JSON y Respuestas Épicas
+
 Comando Bola 8 para tu bot de Discord usando Bot Designer For Discord (BDFD). Incluye respuestas clásicas y una versión caótica, divertida y con actitud al estilo Twis Spark. JSON listo para copiar, mejorar o sparkificar tu bot 
 
 ## Codigo 1 : 
 Prefix : ¡8ball 
+
 Slash : /8ball (pregunta)
+
 ```
 $nomention
 $reply 
