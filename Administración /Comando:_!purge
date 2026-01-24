@@ -1,4 +1,4 @@
-**Comando: !purge / !clear**  
+## Comando: !purge / !clear
 **Alias sugeridos:** purge, clear, limpiar, borrar  
 
 **Descripción:**  
@@ -32,3 +32,50 @@ Establece el canal de logs con una variable (por ejemplo):
 
 **Resumen en una línea (para embed o lista rápida):**  
 `🧹 !purge [cantidad] → Borra hasta 100 mensajes recientes + registra la acción en logs`
+
+```
+$nomention
+$suppressErrors
+$onlyAdmin[No tienes permisos para usar este comando.]
+$reply
+$allowUserMentions[]
+
+$c[─────── Captura la cantidad escrita por el usuario ───────]
+$var[cantidad;$message]
+
+$c[─────── Si no escribió nada → usa 100 por defecto ───────]
+$var[cantidad_real;$if[$isNumber[$var[cantidad]]==true] $var[cantidad] $else 100 $endif]
+
+$c[─────── Cambia este número por el ID real del canal ───────]
+$var[canal_logs;1463310762662559824] 
+  
+$c[─────── Bloquea cantidades inválidas ───────]
+$if[$var[cantidad_real]<=0]
+  $description[❌ La cantidad debe ser mayor a 0.]
+  $color[ff5555]
+$else
+
+$c[─────── Ejecuta el borrado ───────]
+$clear[$var[cantidad_real]]
+
+$c[─────── Mensaje de confirmación ───────]
+$description[🧹 **Eliminados $var[cantidad_real] mensaje(s)** con éxito.]
+$color[55ff55]
+$footer[Por $nickname]
+$addTimestamp
+
+$c[─────── Envía log al canal configurado (si existe) ───────]
+$if[$channelExists[$var[canal_logs]]==true]
+$sendEmbedMessage[$var[canal_logs];;📜 Registro de Purga;;
+**Moderador:** $nickname ($authorID)
+**Canal:** <#$channelID>
+**Mensajes eliminados:** $var[cantidad_real]
+**Fecha y hora:** <t:$getTimestamp:F>
+;ffffff;;;$serverName[$guildID];$serverIcon;;;yes]
+$endif
+
+$c[─────── Limpia el mensaje del comando después de 8 segundos ───────]
+$deleteIn[8s]
+
+$endif 
+```
