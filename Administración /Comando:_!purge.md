@@ -35,47 +35,59 @@ Establece el canal de logs con una variable (por ejemplo):
 
 ```
 $nomention
-$suppressErrors
+$onlyBotPerms[managemessages;No tengo permiso para borrar mensajes aquí.]
+$onlyBotPerms[sendmessages;No tengo permiso para enviar mensajes.]
+$cooldown[5s;⏳ Espera (<t:$sum[$getTimestamp;$getCooldown[normal]]:R>) antes de usar el comando de nuevo]
 $onlyAdmin[No tienes permisos para usar este comando.]
 $reply
 $allowUserMentions[]
 
-$c[─────── Captura la cantidad escrita por el usuario ───────]
-$var[cantidad;$message]
-
-$c[─────── Si no escribió nada → usa 100 por defecto ───────]
+$c[─────── Captura y limpia cantidad (mejor validación) ───────]
+$var[cantidad;$message[1;cantidad]] $c[quita espacios]
 $var[cantidad_real;$if[$isNumber[$var[cantidad]]==true] $var[cantidad] $else 100 $endif]
 
-$c[─────── Cambia este número por el ID real del canal ───────]
-$var[canal_logs;1463310762662559824] 
-  
-$c[─────── Bloquea cantidades inválidas ───────]
+$c[─────── Canal de logs fijo ───────]
+$var[canal_logs;1463310762662559824]
+
+$c[─────── Bloquea inválidos antes de intentar borrar ───────]
 $if[$var[cantidad_real]<=0]
   $description[❌ La cantidad debe ser mayor a 0.]
   $color[ff5555]
+  $deleteIn[6s]
+$elseif[$var[cantidad_real]>100]
+  $description[❌ Máximo 100 mensajes por comando (límite de Discord).]
+  $color[ffaa00]
+  $deleteIn[6s]
 $else
 
-$c[─────── Ejecuta el borrado ───────]
-$clear[$var[cantidad_real]]
+  $c[─────── Intento protegido de clear ───────]
+  $try
+    $clear[$var[cantidad_real]]
+  $catch
+$description[⚠️ No se pudieron borrar los mensajes.
+Posible causa: mensajes > 14 días.]
+    $color[ffaa00]
+    $deleteIn[8s]
+    $stop
+  $endtry
 
-$c[─────── Mensaje de confirmación ───────]
-$description[🧹 **Eliminados $var[cantidad_real] mensaje(s)** con éxito.]
-$color[55ff55]
-$footer[Por $nickname]
-$addTimestamp
+  $c[─────── Mensaje de éxito ───────]
+  $description[🧹 **Eliminados $var[cantidad_real] mensaje(s)** con éxito.]
+  $color[55ff55]
+  $footer[Por $nickname[$authorID]]
+  $addTimestamp
+  $deleteIn[7s] $c[limpieza más razonable, sin async innecesario]
 
-$c[─────── Envía log al canal configurado (si existe) ───────]
-$if[$channelExists[$var[canal_logs]]==true]
-$sendEmbedMessage[$var[canal_logs];;📜 Registro de Purga;;
-**Moderador:** $nickname ($authorID)
+  $c[─────── Log mejorado (color Discord) ───────]
+  $if[$channelExists[$var[canal_logs]]==true]
+    $sendEmbedMessage[$var[canal_logs];;📜 Registro de Purga;;
+**Moderador:** $nickname[$authorID] ($authorID)
 **Canal:** <#$channelID>
 **Mensajes eliminados:** $var[cantidad_real]
-**Fecha y hora:** <t:$getTimestamp:F>
-;ffffff;;;$serverName[$guildID];$serverIcon;;;yes]
+**Fecha y hora:** <t:$getTimestamp:f> (<t:$getTimestamp:R>)
+;5865F2;;;$serverName[$guildID];$serverIcon;;;yes]
+  $endif
+
 $endif
-
-$c[─────── Limpia el mensaje del comando después de 8 segundos ───────]
-$deleteIn[8s]
-
-$endif 
 ```
+ 
