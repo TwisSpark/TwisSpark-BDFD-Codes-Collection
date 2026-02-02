@@ -1,3 +1,4 @@
+
 ```
 $nomention
 
@@ -24,13 +25,13 @@ $else
   $var[n_de_documento;$randomText[A;B;C]$random[10000000;99999999]]
 
   $c[ Fecha de emisión: usa la fecha actual con formato dd-MM-yyyy (ceros incluidos) ]
-  $var[fecha_de_emision;$date[dd-MM-yyyy]]
+  $var[fecha_de_emision;$date]
 
   $c[ RUN (RUT) random realista: 8-9 dígitos + DV random (0-9 o K) ]
   $var[rut;$random[10000000;25999999]-$randomText[0;1;2;3;4;5;6;7;8;9;K]]
 
   $c[ Calcula fecha de vencimiento: +10 años a la emisión ]
-  $var[fecha_vencimiento;$dateAdd[$var[fecha_de_emision];10;year];format:dd-MM-yyyy]
+  $var[fecha_vencimiento;$random[01;31]/$month/$sum[$year;10]]
 
   $c[ Embed principal – diseño épico PLUS Max Ultra Pro ]
   $thumbnail[$authorAvatar]
@@ -68,7 +69,7 @@ $else
   $jsonSetString[dni;activo;si]
 
   $c[ Guarda el JSON completo en la variable de usuario ]
-  $setUserVar[dni;$jsonStringify[$json[dni]];$authorID]
+  $setUserVar[dni;$jsonStringify;$authorID]
 
-$endif 
+$endif  
 ```
