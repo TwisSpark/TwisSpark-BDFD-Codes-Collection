@@ -7,7 +7,7 @@ $jsonParse[$getUserVar[dni;$authorID]]
 $c[ Variables que el usuario puede pasar en el mensaje ]
 $var[nombre;$message[nombre]]
 $var[apellido;$message[apellido]]
-$var[nacionalidad;$message[nacionalidad];default:Chilena]
+$var[nacionalidad;$message[nacionalidad]]
 $var[sexo;$toUppercase[$message[sexo]]]  
 $var[fecha_nac;$message[fecha_de_nacimiento]]
 
