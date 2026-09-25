@@ -29,6 +29,11 @@ Es mucho más seguro guardarla en una variable de BDFD.
 2. Crea una nueva variable con este nombre:  
    `GROQ_KEY`
 3. En el valor, pega tu API key de Groq
+
+|Nombre      | Valor       |
+|------------|-------------|
+|GROQ_KEY | gsk_...       |
+
 4. Guarda los cambios
 
 Así tu key queda protegida y no se ve en el código.
@@ -105,3 +110,7 @@ Puedes cambiar el modelo en la línea `"model": "..."` por cualquiera de estos:
 ## 📄 Licencia
 
 Este código es de uso libre. Puedes modificarlo y usarlo en tus bots.
+
+# 🛠️ Soporte
+
+Si tienes problemas o necesitas ayuda para configurar nuevas opciones, puedes unirte al servidor de soporte de **[Sparkify World](https://sparkify-world.vercel.app/)**.
