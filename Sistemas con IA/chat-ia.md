@@ -12,7 +12,7 @@ Comando de inteligencia artificial para **Bot Designer For Discord** usando la A
 3. En el menú lateral, haz clic en **API Keys**
 4. Pulsa el botón **Create API Key**
 5. Dale un nombre (por ejemplo: `BDFD`) y copia la key  
-   *(empieza por `gsk_...`)*
+   *(empieza por `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`)*
 
 > ⚠️ **Importante:** Guárdala bien, solo se muestra una vez.
 
