@@ -1,4 +1,3 @@
-
 # 🤖 Comando de IA con Groq para BDFD
 
 Comando de inteligencia artificial para **Bot Designer For Discord** usando la API gratuita de **Groq**.
@@ -12,7 +11,7 @@ Comando de inteligencia artificial para **Bot Designer For Discord** usando la A
 3. En el menú lateral, haz clic en **API Keys**
 4. Pulsa el botón **Create API Key**
 5. Dale un nombre (por ejemplo: `BDFD`) y copia la key  
-   *(empieza por `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`)*
+   *(empieza por `gsk_....`)*
 
 > ⚠️ **Importante:** Guárdala bien, solo se muestra una vez.
 
@@ -30,9 +29,13 @@ Es mucho más seguro guardarla en una variable de BDFD.
    `GROQ_KEY`
 3. En el valor, pega tu API key de Groq
 
-|Nombre      | Valor       |
-|------------|-------------|
-|GROQ_KEY | gsk_...       |
+| Nombre   | Valor                                                       |
+|----------|-------------------------------------------------------------|
+| GROQ_KEY | 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    |
+
+> ⚠️ **Aviso:** la API key de la tabla es solo un **ejemplo**.
+> No es real, no fue creada en Groq y **no funciona**. Si la usas, recibirás un error 401.
+> Reemplázala por tu propia key desde [console.groq.com](https://console.groq.com).
 
 4. Guarda los cambios
 
@@ -66,7 +69,7 @@ $httpPost[https://api.groq.com/openai/v1/chat/completions;{
       "role": "user",
       "content": "$message"
     }
- \],
+  \],
   "max_tokens": 800,
   "temperature": 0.7
 }]
@@ -90,12 +93,12 @@ $endif
 
 Puedes cambiar el modelo en la línea `"model": "..."` por cualquiera de estos:
 
-| Modelo                    | Descripción                  | Recomendado |
-|---------------------------|------------------------------|-------------|
-| `openai/gpt-oss-20b`      | Rápido y equilibrado         | ✅ Sí       |
-| `openai/gpt-oss-120b`     | Más inteligente              | Mejor calidad |
-| `qwen/qwen3.8-27b`        | Excelente en español         | Muy bueno   |
-| `qwen/qwen3.6-27b`        | Alternativa sólida           | Buena       |
+| Modelo                | Descripción          | Recomendado   |
+|-----------------------|----------------------|---------------|
+| `openai/gpt-oss-20b`  | Rápido y equilibrado | ✅ Sí         |
+| `openai/gpt-oss-120b` | Más inteligente      | Mejor calidad |
+| `qwen/qwen3.8-27b`    | Excelente en español | Muy bueno     |
+| `qwen/qwen3.6-27b`    | Alternativa sólida   | Buena         |
 
 ---
 
